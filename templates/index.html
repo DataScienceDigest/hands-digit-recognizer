@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<style>
+    form {
+        border: 1px solid black;
+        padding: 40px;
+        border-radius: 10px;
+    }
+
+    span {
+        border: 1px solid black;
+        padding: 2px 200px 2px 2px;
+        border-radius: 3px;
+    }
+</style>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Upload Image</h2>
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="imageUpload" class="btn btn-primary">
+                    Choose File
+                    <input type="file" class="form-control-file" id="imageUpload" name="file_upload"
+                        style="display: none;">
+                </label>
+                <span id="fileName" class="ml-2">No file chosen</span>
+            </div>
+            <button type="submit" class="btn btn-success">Upload</button>
+
+            <br><br>
+
+            <h5>The digit is : {{predict}}</h5>
+            <br>
+            <br>
+            <img id="displayImage" src=""  style="max-width: 300px;">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('imageUpload').addEventListener('change', function () {
+            var fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+            document.getElementById('fileName').textContent = fileName;
+        });
+
+        document.getElementById('imageUpload').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('displayImage').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
